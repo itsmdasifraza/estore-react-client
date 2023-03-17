@@ -1,11 +1,11 @@
 import React from 'react'
 import "./Register.css";
-
+import environment from "../../../environments/environment.js";
 
 
 const Register = () => {
     
-    document.title = `Register | eStore`;
+    document.title = `Register | ${environment.app.name}`;
 
     (()=>{
         if(localStorage.getItem("currentUser")){
