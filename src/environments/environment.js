@@ -1,4 +1,4 @@
-export const environment = {
+const environment = {
     backend: {
       connection : "http",
       ip : "127.0.0.1:3000"
@@ -12,4 +12,5 @@ export const environment = {
       email : "itsmdasifraza@gmail.com"
     }
   };
+  export default environment; 
   
