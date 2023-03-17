@@ -5,6 +5,7 @@ const environment = {
     },
     app : {
       name : "eStore",
+      description: " Electroic store for online shopping"
     },
     developer : {
       name : "Md Asif Raza",
