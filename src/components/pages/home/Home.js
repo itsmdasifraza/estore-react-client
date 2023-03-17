@@ -3,7 +3,11 @@ import { Link } from "react-router-dom"
 import Button from '@mui/material/Button';
 import "./Home.css";
 import landingPic from '../../../assets/home-landing-page.png';
+import environment from "../../../environments/environment.js";
+
 const Home = () => {
+  document.title = `${environment.app.name} | ${environment.app.description}`;
+
     return (
         <>
         <section>

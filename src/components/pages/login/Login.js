@@ -1,8 +1,11 @@
 import React from "react";
 //import Button from '@mui/material/Button';
 import "./Login.css";
-const Login = () => {
+import environment from "../../../environments/environment.js";
 
+const Login = () => {
+    document.title = `Login | ${environment.app.name}`;
+    
     function generateToken() {
         let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
         let result = '';
