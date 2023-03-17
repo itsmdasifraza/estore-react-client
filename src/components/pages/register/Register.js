@@ -5,6 +5,8 @@ import "./Register.css";
 
 const Register = () => {
     
+    document.title = `Register | eStore`;
+
     (()=>{
         if(localStorage.getItem("currentUser")){
             window.location.href = "/shop";    
