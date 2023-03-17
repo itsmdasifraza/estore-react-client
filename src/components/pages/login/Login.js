@@ -16,18 +16,13 @@ const Login = () => {
             window.location.href = "/shop";
         }
     })();
-    // function guard() {
-    //     if (localStorage.getItem("currentUser")) {
-    //         window.location.href = "/shop";
-    //     }
-    // }
 
     const loginForm = (event) => {
         event.preventDefault();
         // error.innerHTML = "";
         let users = JSON.parse(localStorage.getItem("users"));
         users.forEach(element => {
-            if (element.email === loginForm.target[0].value && element.pass === loginForm.target[1].value) {
+            if (element.email === event.target["email"].value && element.pass === event.target["pass"].value) {
                 let currentUser = element;
                 currentUser["token"] = generateToken();
                 localStorage.setItem("currentUser", JSON.stringify(currentUser));
@@ -46,11 +41,11 @@ const Login = () => {
                     <div id="error"></div>
                     <form onSubmit={loginForm}>
                         <div className="form-group pb-3">
-                            <input type="email" className="form-control" id="email" aria-describedby="emailHelp"
+                            <input type="email" className="form-control" id="email" name="email" aria-describedby="emailHelp"
                                 placeholder="Email" required />
                         </div>
                         <div className="form-group pb-3">
-                            <input type="password" className="form-control" id="pass" placeholder="Password" required />
+                            <input type="password" className="form-control" id="pass" name="pass" placeholder="Password" required />
                         </div>
                         <button type="submit" className="btn btn-dark">Login</button>
                     </form>
