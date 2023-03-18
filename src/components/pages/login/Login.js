@@ -2,8 +2,10 @@ import React from "react";
 //import Button from '@mui/material/Button';
 import "./Login.css";
 import environment from "../../../environments/environment.js";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    let navigate = useNavigate();
     document.title = `Login | ${environment.app.name}`;
     
     function generateToken() {
@@ -16,7 +18,8 @@ const Login = () => {
     }
     (()=>{
         if (localStorage.getItem("currentUser")) {
-            window.location.href = "/shop";
+            // window.location.href = "/shop";
+            navigate(`/shop`);
         }
     })();
 
@@ -30,7 +33,8 @@ const Login = () => {
                 currentUser["token"] = generateToken();
                 localStorage.setItem("currentUser", JSON.stringify(currentUser));
                 // redirect to login page
-                window.location.href = "/shop";
+                // window.location.href = "/shop";
+                navigate(`/shop`);
             }
         });
         //error.innerHTML = "<small class='text-danger'>Authentication Failed</small>";
