@@ -1,15 +1,17 @@
 import React from 'react'
 import "./Register.css";
 import environment from "../../../environments/environment.js";
+import { useNavigate } from 'react-router-dom';
 
 
 const Register = () => {
-    
+    let navigate = useNavigate();
     document.title = `Register | ${environment.app.name}`;
 
     (()=>{
         if(localStorage.getItem("currentUser")){
-            window.location.href = "/shop";    
+            // window.location.href = "/shop"; 
+            navigate(`/shop`);   
         }
     })();
 
@@ -38,8 +40,8 @@ const Register = () => {
             users.push(currUser);
         }
         localStorage.setItem("users", JSON.stringify(users));
-        // browserHistory.push("/login");
-        window.location.href = "/login";
+        // window.location.href = "/login";
+        navigate(`/login`);
     }
     
   return (
