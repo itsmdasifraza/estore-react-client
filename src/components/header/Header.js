@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 const Header = () => {
     return (
         <>
-            <section>
+            <section className= "header">
                 <nav>
                     <div className="brand">
                         <Link to="/">eStore</Link>
