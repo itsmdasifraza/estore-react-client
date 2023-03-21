@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./Shop.css";
 import axios from 'axios';
+import { useDispatch, useSelector } from "react-redux";
+import { setProducts } from "../../../redux/actions/products.js";
 
 const Product = (props)=>{
     return (
@@ -42,15 +44,19 @@ const Product = (props)=>{
 }
 
 const Shop = () => {
-    const [products, setProducts] = useState([]);
+    // const [products, setProducts] = useState([]);
+    const products = useSelector((state) => state.products);
+    const dispatch = useDispatch();
+
+    const fetchProducts = async () => {
+        let res = await axios.get(`https://fakestoreapi.com/products`);
+        res = await res.data;
+        console.log(res);
+        dispatch(setProducts(res));
+        localStorage.setItem("products", JSON.stringify(res));
+    }
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            let res = await axios.get(`https://fakestoreapi.com/products`);
-            res = await res.data;
-            setProducts(res);
-            localStorage.setItem("products", JSON.stringify(res));
-        }
         fetchProducts();
     }, []);
 
