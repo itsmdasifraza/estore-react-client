@@ -3,6 +3,7 @@ import "./Shop.css";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../../../redux/actions/products.js";
+import filterByCategory from '../../../filters/filterByCategory';
 
 const Product = (props)=>{
     return (
@@ -44,10 +45,11 @@ const Product = (props)=>{
 }
 
 const Shop = () => {
-    // const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
     const products = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
+    let categoryStatus = "all";
     const fetchProducts = async () => {
         let res = await axios.get(`https://fakestoreapi.com/products`);
         res = await res.data;
@@ -60,6 +62,14 @@ const Shop = () => {
         fetchProducts();
     }, []);
 
+    useEffect(() => {
+        setFilteredProducts(products);
+    }, [products]);
+
+    let startFiltering = () => {
+        setFilteredProducts(filterByCategory(categoryStatus, products));
+        console.log(filteredProducts);
+    }
 
     return (
         <>
@@ -111,15 +121,15 @@ const Shop = () => {
                     <input type="text" placeholder="Search" id="search" />
 
                     <div className="filters">
-                        <div id="all" onClick="allProducts(this)" className="filter active">All</div>
-                        <div id="mens" onClick="onlyMens(this)" className="filter">Mens</div>
-                        <div id="womens" onClick="onlyWomens(this)" className="filter">Womens</div>
-                        <div id="jewellery" onClick="onlyJewellery(this)" className="filter">Jewellery</div>
-                        <div id="electronics" onClick="onlyElectronics(this)" className="filter">Electronics</div>
+                        <div id="all" onClick={()=>{categoryStatus = "all"; startFiltering();}} className="filter active">All</div>
+                        <div id="mens" onClick={()=>{categoryStatus = "men's clothing"; startFiltering();}} className="filter">Mens</div>
+                        <div id="womens" onClick={()=>{categoryStatus = "women's clothing"; startFiltering();}} className="filter">Womens</div>
+                        <div id="jewellery" onClick={()=>{categoryStatus = "jewelery"; startFiltering();}} className="filter">Jewellery</div>
+                        <div id="electronics" onClick={()=>{categoryStatus = "electronics"; startFiltering();}} className="filter">Electronics</div>
                     </div>
                     <section class={{zIndex: "-1 important"}} id="product-items">
                         <div className="row">
-                            {products.map((element) => {
+                            {filteredProducts.map((element) => {
                                 
                                 return(<Product  
                                     key = {element.title}
