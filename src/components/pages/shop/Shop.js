@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { setProducts } from "../../../redux/actions/products.js";
 import filterByCategory from '../../../filters/filterByCategory';
+import filterByRating from '../../../filters/filterByRating';
 
 const Product = (props)=>{
     return (
@@ -49,7 +50,10 @@ const Shop = () => {
     const products = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
-    let categoryStatus = "all";
+    const [categoryStatus, setCategoryStatus] = useState("all");
+    const [rate, setRate] = useState(0);
+
+
     const fetchProducts = async () => {
         let res = await axios.get(`https://fakestoreapi.com/products`);
         res = await res.data;
@@ -67,9 +71,13 @@ const Shop = () => {
     }, [products]);
 
     let startFiltering = () => {
-        setFilteredProducts(filterByCategory(categoryStatus, products));
-        console.log(filteredProducts);
+        let fc = filterByCategory(categoryStatus, products);
+        let fr = filterByRating(rate, fc);
+        setFilteredProducts(fr);
     }
+    useEffect(() => {
+        startFiltering();
+    }, [rate, categoryStatus]);
 
     return (
         <>
@@ -77,12 +85,12 @@ const Shop = () => {
                 <aside>
                     <section>
                         <title>Rating</title>
-                        <input onChange="filterCategory()"
+                        <input onChange={(e)=>{setRate(parseInt(e.target.value));}}
                             type="range"
                             id="range"
                             min="0"
                             max="5"
-                            value="0"
+                            value={rate}
                             list="values"
                         />
                         <datalist id="values">
@@ -121,11 +129,11 @@ const Shop = () => {
                     <input type="text" placeholder="Search" id="search" />
 
                     <div className="filters">
-                        <div id="all" onClick={()=>{categoryStatus = "all"; startFiltering();}} className="filter active">All</div>
-                        <div id="mens" onClick={()=>{categoryStatus = "men's clothing"; startFiltering();}} className="filter">Mens</div>
-                        <div id="womens" onClick={()=>{categoryStatus = "women's clothing"; startFiltering();}} className="filter">Womens</div>
-                        <div id="jewellery" onClick={()=>{categoryStatus = "jewelery"; startFiltering();}} className="filter">Jewellery</div>
-                        <div id="electronics" onClick={()=>{categoryStatus = "electronics"; startFiltering();}} className="filter">Electronics</div>
+                        <div id="all" onClick={()=>{setCategoryStatus("all"); }} className="filter active">All</div>
+                        <div id="mens" onClick={()=>{setCategoryStatus("men's clothing"); }} className="filter">Mens</div>
+                        <div id="womens" onClick={()=>{setCategoryStatus("women's clothing"); }} className="filter">Womens</div>
+                        <div id="jewellery" onClick={()=>{setCategoryStatus("jewelery"); }} className="filter">Jewellery</div>
+                        <div id="electronics" onClick={()=>{setCategoryStatus("electronics"); }} className="filter">Electronics</div>
                     </div>
                     <section class={{zIndex: "-1 important"}} id="product-items">
                         <div className="row">
