@@ -52,7 +52,7 @@ const Product = () => {
                          
                         }
                         <br/><br/>
-                         <Link to="/cart"><Button  variant="contained" size="medium">Manage cart</Button></Link>
+                         <Link to="/cart"><Button  variant="contained" size="medium">Visit cart</Button></Link>
                     </div>
                 </div>
             </div>
