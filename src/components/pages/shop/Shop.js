@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import "./Shop.css";
-import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
-import { setProducts } from "../../../redux/actions/products.js";
 import filterByCategory from '../../../filters/filterByCategory';
 import filterByRating from '../../../filters/filterByRating';
+import filterByText from '../../../filters/filterByText';
 
 const Product = (props)=>{
     return (
@@ -52,19 +51,10 @@ const Shop = () => {
 
     const [categoryStatus, setCategoryStatus] = useState("all");
     const [rate, setRate] = useState(0);
+    const [searchText, setSearchText] = useState("");
 
 
-    const fetchProducts = async () => {
-        let res = await axios.get(`https://fakestoreapi.com/products`);
-        res = await res.data;
-        console.log(res);
-        dispatch(setProducts(res));
-        localStorage.setItem("products", JSON.stringify(res));
-    }
-
-    useEffect(() => {
-        fetchProducts();
-    }, []);
+    
 
     useEffect(() => {
         setFilteredProducts(products);
@@ -73,11 +63,12 @@ const Shop = () => {
     let startFiltering = () => {
         let fc = filterByCategory(categoryStatus, products);
         let fr = filterByRating(rate, fc);
-        setFilteredProducts(fr);
+        let ft = filterByText(searchText, fr);
+        setFilteredProducts(ft);
     }
     useEffect(() => {
         startFiltering();
-    }, [rate, categoryStatus]);
+    }, [rate, categoryStatus, searchText]);
 
     return (
         <>
@@ -126,7 +117,7 @@ const Shop = () => {
                 </aside>
                 <main-content>
 
-                    <input type="text" placeholder="Search" id="search" />
+                    <input type="text" onChange={(e)=>{ setSearchText(e.target.value)}} value= {searchText} placeholder="Search" id="search" />
 
                     <div className="filters">
                         <div id="all" onClick={()=>{setCategoryStatus("all"); }} className="filter active">All</div>
