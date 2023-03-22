@@ -6,26 +6,35 @@ import Header from "./components/header/Header.js";
 import Register from "./components/pages/register/Register.js";
 import Shop from "./components/pages/shop/Shop.js";
 import { useDispatch} from "react-redux";
-import { setProducts } from "./redux/actions/products";
+import { setProducts } from "./redux/actions/productsAction";
 import axios from 'axios';
-import products from "./products";
 import React, { useEffect} from 'react'
 import Product from "./components/pages/product/Product";
 
 function App() {
   const dispatch = useDispatch();
-  const fetchProducts = async () => {
-    dispatch(setProducts(products));
-    // let res = await axios.get(`https://fakestoreapi.com/products`);
-    // res = await res.data;
-    // console.log(res);
-    // dispatch(setProducts(res));
-    // localStorage.setItem("products", JSON.stringify(res));
-  }
+
+  
 
   useEffect(() => {
+    const fetchProducts = async () => {
+      let data = localStorage.getItem("products");
+      data = JSON.parse(data);
+      if(data) {
+        dispatch(setProducts(data));
+        return;
+      }
+      
+      let res = await axios.get(`https://fakestoreapi.com/products`);
+      res = await res.data;
+      // console.log(res);
+      res.forEach((elem)=>{
+          elem["presentInCart"] = false;
+      });
+      dispatch(setProducts(res));
+    }
     fetchProducts();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>

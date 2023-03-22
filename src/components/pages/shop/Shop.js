@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import "./Shop.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import filterByCategory from '../../../filters/filterByCategory';
 import filterByRating from '../../../filters/filterByRating';
 import filterByText from '../../../filters/filterByText';
 import { useNavigate } from 'react-router';
+import environment from "../../../environments/environment.js";
 
 const Product = (props)=>{
     let navigate = useNavigate();
@@ -26,20 +27,10 @@ const Product = (props)=>{
 >{props.title}</h6></div>
                         <div className="d-flex" style={{justifyContent:"space-between"}}>
                             <h6>{props.price}$</h6>
-                            {/* <h6>{element.sizes[0]},{element.sizes[1]},{element.sizes[2]}</h6> */}
                         </div>
                     </div>
-                    {/* <div class="d-flex px-3" >
-                        <h6>Colors:</h6>
-                        <div class="d-flex">
-                            <div class="circle" style="background-color: ${element.colours[0]};"></div>
-                            <div class="circle" style="background-color: ${element.colours[1]};"></div>
-                            <div class="circle" style="background-color: ${element.colours[2]}; margin:0;"></div>
-                        </div>
-                    </div> */}
                     <div className="px-3 pb-3">Rating: {Math.round(props.rate)}</div>
                 </div>
-                <button className="btn btn-block btn-dark" style={{width:"100%",borderRadius:0}}   id="addBtn">Add to Cart</button>
             </div>
         </div>
     </>
@@ -49,28 +40,26 @@ const Product = (props)=>{
 const Shop = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const products = useSelector((state) => state.products);
-    const dispatch = useDispatch();
-
     const [categoryStatus, setCategoryStatus] = useState("all");
     const [rate, setRate] = useState(0);
     const [searchText, setSearchText] = useState("");
 
-
-    
+    document.title = `Shop | ${environment.app.name}`;
 
     useEffect(() => {
         setFilteredProducts(products);
     }, [products]);
 
-    let startFiltering = () => {
-        let fc = filterByCategory(categoryStatus, products);
-        let fr = filterByRating(rate, fc);
-        let ft = filterByText(searchText, fr);
-        setFilteredProducts(ft);
-    }
+    
     useEffect(() => {
+        let startFiltering = () => {
+            let fc = filterByCategory(categoryStatus, products);
+            let fr = filterByRating(rate, fc);
+            let ft = filterByText(searchText, fr);
+            setFilteredProducts(ft);
+        }
         startFiltering();
-    }, [rate, categoryStatus, searchText]);
+    }, [rate, categoryStatus, searchText, products]);
 
     return (
         <>
