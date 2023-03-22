@@ -4,12 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import filterByCategory from '../../../filters/filterByCategory';
 import filterByRating from '../../../filters/filterByRating';
 import filterByText from '../../../filters/filterByText';
+import { useNavigate } from 'react-router';
 
 const Product = (props)=>{
+    let navigate = useNavigate();
     return (
         <>
         <div className="col-md-3 col-sm-4 pb-3">
-            <div style={{border:"1px solid grey",overflow:"hidden" }} >
+            <div onClick={()=>{navigate(`/shop/${props.id}`);}} style={{border:"1px solid grey",overflow:"hidden" }} >
                 <div style={{display:"flex"}} >
                     <img src={props.image} alt="Item" height="200px" style={{margin:"0 auto"}} />
                 </div>
@@ -37,7 +39,7 @@ const Product = (props)=>{
                     </div> */}
                     <div className="px-3 pb-3">Rating: {Math.round(props.rate)}</div>
                 </div>
-                <button className="btn btn-block btn-dark" style={{width:"100%",borderRadius:0}}  onClick="addToCart(this, ${element.id})" id="addBtn">Add to Cart</button>
+                <button className="btn btn-block btn-dark" style={{width:"100%",borderRadius:0}}   id="addBtn">Add to Cart</button>
             </div>
         </div>
     </>
@@ -97,20 +99,20 @@ const Shop = () => {
                         <title >Price Range</title>
                         <ul style={{ paddingLeft: 0 }} >
                             <li>
-                                <input id="0-25" onClick="setRange(this.value)" value="0-25" type="checkbox" name="prange" />
-                                <label for="0-25">$0 to $25</label>
+                                <input id="0-25"  value="0-25" type="checkbox" name="prange" />
+                                <label htmlFor="0-25">$0 to $25</label>
                             </li>
                             <li>
-                                <input id="25-50" onClick="setRange(this.value)" value="25-50" type="checkbox" name="prange" />
-                                <label for="25-50">$25 to $50</label>
+                                <input id="25-50"  value="25-50" type="checkbox" name="prange" />
+                                <label htmlFor="25-50">$25 to $50</label>
                             </li>
                             <li>
-                                <input id="50-100" onClick="setRange(this.value)" value="50-100" type="checkbox" name="prange" />
-                                <label for="50-100">$50 to $100</label>
+                                <input id="50-100"  value="50-100" type="checkbox" name="prange" />
+                                <label htmlFor="50-100">$50 to $100</label>
                             </li>
                             <li>
-                                <input id="100on" onClick="setRange(this.value)" value="100on" type="checkbox" name="prange" />
-                                <label for="100on">$100 onwards</label>
+                                <input id="100on"  value="100on" type="checkbox" name="prange" />
+                                <label htmlFor="100on">$100 onwards</label>
                             </li>
                         </ul>
                     </section>
@@ -126,12 +128,13 @@ const Shop = () => {
                         <div id="jewellery" onClick={()=>{setCategoryStatus("jewelery"); }} className="filter">Jewellery</div>
                         <div id="electronics" onClick={()=>{setCategoryStatus("electronics"); }} className="filter">Electronics</div>
                     </div>
-                    <section class={{zIndex: "-1 important"}} id="product-items">
+                    <section className={{zIndex: "-1 important"}} id="product-items">
                         <div className="row">
                             {filteredProducts.map((element) => {
                                 
                                 return(<Product  
-                                    key = {element.title}
+                                    key = {element.id}
+                                    id= {element.id}
                                    image = {element.image}
                                        title = {element.title}
                                        price = {element.price}

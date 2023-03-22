@@ -10,6 +10,7 @@ import { setProducts } from "./redux/actions/products";
 import axios from 'axios';
 import products from "./products";
 import React, { useEffect} from 'react'
+import Product from "./components/pages/product/Product";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/shop" element={<Shop />} />
+        <Route path="/shop/:id" element={<Product />} />
       </Routes>
     </>
   );
