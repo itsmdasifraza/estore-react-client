@@ -57,14 +57,14 @@ const Header = () => {
             <section className= "header">
                 <nav>
                     <div className="brand">
-                        <Link to="/">{environment.app.name}</Link>
+                        <Link  to="/"> <span style={{color:"black"}}>{environment.app.name}</span></Link>
                     </div>
                     <div className="nav-items">
-                    {!login ? <Link to="/">Home</Link> : <></>}
-                    {!login ? <Link to="/login">Login</Link> : <></>}
-                    {!login ? <Link to="/register">Register</Link> : <></>}
-                    {login ? <Link to="/shop"> <Tooltip title="Shop"><AddBusinessIcon fontSize="medium" sx={{color: "white"}}/></Tooltip></Link> : <></>}
-                    {login ? <Link to="/cart"><Tooltip title="Cart"><IconButton sx={{color:"white"}} aria-label="cart">
+                    {!login ? <Link to="/"><span style={{color:"black"}}>HOME</span></Link> : <></>}
+                    {!login ? <Link to="/login"><span style={{color:"black"}}>LOGIN</span></Link> : <></>}
+                    {!login ? <Link to="/register"><span style={{color:"black"}}>REGISTER</span></Link> : <></>}
+                    {login ? <Link to="/shop"> <Tooltip title="Shop"><AddBusinessIcon fontSize="medium" sx={{color: "black"}}/></Tooltip></Link> : <></>}
+                    {login ? <Link to="/cart"><Tooltip title="Cart"><IconButton sx={{color:"black"}} aria-label="cart">
       <StyledBadge badgeContent={count} color="secondary">
         <ShoppingCartIcon />
       </StyledBadge>
@@ -83,7 +83,7 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <AccountCircleIcon sx={{color:"white"}}/>
+            <AccountCircleIcon sx={{color:"black"}}/>
             {/* <Avatar sx={{ width: 28, height: 28, backgroundColor: "#0080ff" }}></Avatar> */}
           </IconButton>
         </Tooltip>

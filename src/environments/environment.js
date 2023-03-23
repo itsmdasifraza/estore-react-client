@@ -5,7 +5,7 @@ const environment = {
     },
     app : {
       name : "eStore",
-      description: " Electroic store for online shopping"
+      description: " Electroic store for online shopping. This project is build using React, Redux, Bootstrap, Material UI, API, and LocalStorage."
     },
     developer : {
       name : "Md Asif Raza",
