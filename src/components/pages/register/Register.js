@@ -8,13 +8,6 @@ const Register = () => {
     let navigate = useNavigate();
     document.title = `Register | ${environment.app.name}`;
 
-    (()=>{
-        if(localStorage.getItem("currentUser")){
-            // window.location.href = "/shop"; 
-            navigate(`/shop`);   
-        }
-    })();
-
     const  passwordMatch = (pass1, pass2) => {
         if(pass1 === pass2) return true;
         return false;
