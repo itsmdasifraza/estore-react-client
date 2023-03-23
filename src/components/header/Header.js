@@ -13,6 +13,9 @@ import Logout from '@mui/icons-material/Logout';
 import Badge from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Tooltip from '@mui/material/Tooltip';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
+import environment from "../../environments/environment.js";
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -53,24 +56,24 @@ const Header = () => {
             <section className= "header">
                 <nav>
                     <div className="brand">
-                        <Link to="/">eStore</Link>
+                        <Link to="/">{environment.app.name}</Link>
                     </div>
                     <div className="nav-items">
                     {!login ? <Link to="/">Home</Link> : <></>}
                     {!login ? <Link to="/login">Login</Link> : <></>}
                     {!login ? <Link to="/register">Register</Link> : <></>}
-                    {login ? <Link to="/shop">Shop</Link> : <></>}
-                    {login ? <Link to="/cart"><IconButton sx={{color:"white"}} aria-label="cart">
+                    {login ? <Link to="/shop"> <Tooltip title="Shop"><AddBusinessIcon fontSize="medium" sx={{color: "white"}}/></Tooltip></Link> : <></>}
+                    {login ? <Link to="/cart"><Tooltip title="Cart"><IconButton sx={{color:"white"}} aria-label="cart">
       <StyledBadge badgeContent={count} color="secondary">
         <ShoppingCartIcon />
       </StyledBadge>
-    </IconButton></Link> : <></>}
+    </IconButton></Tooltip></Link> : <></>}
                     
                     
 
                     {login ? <React.Fragment>
-      {/* <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}> */}
-        {/* <Tooltip title="Account settings"> */}
+  
+        <Tooltip title="Account">
           <IconButton
             onClick={handleClick}
             size="small"
@@ -79,10 +82,10 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32, backgroundColor: "#0080ff" }}>{ JSON.parse(localStorage.getItem("currentUser")).name[0].toUpperCase()}</Avatar>
+            <Avatar sx={{ width: 28, height: 28, backgroundColor: "#0080ff" }}>{ JSON.parse(localStorage.getItem("currentUser")).name[0].toUpperCase()}</Avatar>
           </IconButton>
-        {/* </Tooltip> */}
-      {/* </Box> */}
+        </Tooltip>
+    
       <Menu
         anchorEl={anchorEl}
         id="account-menu"
@@ -122,7 +125,7 @@ const Header = () => {
         <Avatar sx={{ width: 32, height: 32 , backgroundColor: "#0080ff" }}>{ JSON.parse(localStorage.getItem("currentUser")).name[0].toUpperCase()}</Avatar> My profile 
         </MenuItem></Link>
         <Divider />
-        <Link to="/password" >
+        <Link to="/change-password" >
         <MenuItem sx={{color:"black"}} onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
