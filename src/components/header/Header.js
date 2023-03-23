@@ -16,6 +16,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Tooltip from '@mui/material/Tooltip';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import environment from "../../environments/environment.js";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -82,7 +83,8 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <Avatar sx={{ width: 28, height: 28, backgroundColor: "#0080ff" }}>{ JSON.parse(localStorage.getItem("currentUser")).name[0].toUpperCase()}</Avatar>
+            <AccountCircleIcon sx={{color:"white"}}/>
+            {/* <Avatar sx={{ width: 28, height: 28, backgroundColor: "#0080ff" }}></Avatar> */}
           </IconButton>
         </Tooltip>
     
@@ -122,7 +124,9 @@ const Header = () => {
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
         <Link to="/profile" ><MenuItem sx={{color:"black"}} onClick={handleClose}>
-        <Avatar sx={{ width: 32, height: 32 , backgroundColor: "#0080ff" }}>{ JSON.parse(localStorage.getItem("currentUser")).name[0].toUpperCase()}</Avatar> My profile 
+        
+        <Avatar sx={{ width: 32, height: 32 , backgroundColor: "transparent" }}><AccountCircleIcon sx={{color:"grey"}}/></Avatar> 
+         My profile 
         </MenuItem></Link>
         <Divider />
         <Link to="/change-password" >
