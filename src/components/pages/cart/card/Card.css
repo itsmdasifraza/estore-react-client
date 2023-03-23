@@ -1,7 +1,8 @@
-.checkout{
+.pro-card{
     background-color: white;
+    overflow: hidden;
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-    padding: 15px;
+    cursor: pointer;
 }
