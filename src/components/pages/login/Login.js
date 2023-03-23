@@ -16,12 +16,6 @@ const Login = () => {
         }
         return result;
     }
-    (()=>{
-        if (localStorage.getItem("currentUser")) {
-            // window.location.href = "/shop";
-            navigate(`/shop`);
-        }
-    })();
 
     const loginForm = (event) => {
         event.preventDefault();

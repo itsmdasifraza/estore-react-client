@@ -12,7 +12,9 @@ import React, { useEffect} from 'react'
 import Product from "./components/pages/product/Product";
 import Cart from "./components/pages/cart/Cart";
 import Lost from "./components/pages/lost/Lost"
-import Payment from "./components/pages/payment/Payment";
+import Payment from "./components/pages/payment/Payment"
+import Authorized from "./protect/Authorized";
+import Unauthorized from "./protect/Unauthorized";
 function App() {
   const dispatch = useDispatch();
 
@@ -42,13 +44,13 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/shop/:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/payment/:amount" element={<Payment />} />
+        <Route path="/" element={<Unauthorized Component= {Home}/>} />
+        <Route path="/login" element={<Unauthorized Component= {Login}/>} />
+        <Route path="/register" element={<Unauthorized Component= {Register}/>} />
+        <Route path="/shop" element={<Authorized Component= {Shop}/>} />
+        <Route path="/shop/:id" element={<Authorized Component= {Product}/>} />
+        <Route path="/cart" element={<Authorized Component= {Cart}/>} />
+        <Route path="/payment/:amount" element={<Authorized Component= {Payment}/>} />
         <Route path="/*" element={<Lost />} />
       </Routes>
     </>
