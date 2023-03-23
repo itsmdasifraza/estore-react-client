@@ -113,7 +113,7 @@ const Cart = () => {
                             </div>
                             <hr />
                             <Button onClick={()=>{
-                                navigate(`/razorpay/${Math.round(totalPrice) }`);
+                                navigate(`/payment/${Math.round(totalPrice) }`);
                             }}  variant="contained" size="medium">Checkout</Button>
                    
                         </div>
