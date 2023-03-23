@@ -2,3 +2,10 @@ a{
    text-decoration: none; 
 }
 
+.heading{
+   font-size: 100px;
+   font-weight: 800;
+}
+.first-button{
+   margin-right: 15px !important;
+}
