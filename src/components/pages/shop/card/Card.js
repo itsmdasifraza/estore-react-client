@@ -22,7 +22,7 @@ const Card = (props)=>{
 
 >{props.title}</h6></div>
                         <div className="d-flex" style={{justifyContent:"space-between"}}>
-                            <h6>{props.price}$</h6>
+                            <h6>${props.price}</h6>
                             <div className="pb-3"><Rating name="read-only" value={Math.round(props.rate)} readOnly /></div>
                
                         </div>
