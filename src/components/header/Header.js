@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Header.css";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom"
@@ -10,11 +10,23 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
+const StyledBadge = styled(Badge)(({ theme }) => ({
+  '& .MuiBadge-badge': {
+    right: -3,
+    top: 13,
+    border: `2px solid ${theme.palette.background.paper}`,
+    padding: '0 4px',
+  },
+}));
 
 const Header = () => {
     const login = useSelector((state) => state.login);
     const navigate = useNavigate();
-
+    const products = useSelector((state) => state.products);
     const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -23,7 +35,19 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
+  const [count, setCount] = useState(0);
+  useEffect(()=>{
+    setCount((c)=>{
+        return 0;
+    });
+    products.forEach(elem => {
+        if(elem.presentInCart === true){
+            setCount((c)=>{
+                return c + 1;
+            });
+        }
+    });
+  },[products]);
     return (
         <>
             <section className= "header">
@@ -36,7 +60,11 @@ const Header = () => {
                     {!login ? <Link to="/login">Login</Link> : <></>}
                     {!login ? <Link to="/register">Register</Link> : <></>}
                     {login ? <Link to="/shop">Shop</Link> : <></>}
-                    {login ? <Link to="/cart">Cart</Link> : <></>}
+                    {login ? <Link to="/cart"><IconButton sx={{color:"white"}} aria-label="cart">
+      <StyledBadge badgeContent={count} color="secondary">
+        <ShoppingCartIcon />
+      </StyledBadge>
+    </IconButton></Link> : <></>}
                     
                     
 
