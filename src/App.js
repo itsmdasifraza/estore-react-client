@@ -12,6 +12,7 @@ import React, { useEffect} from 'react'
 import Product from "./components/pages/product/Product";
 import Cart from "./components/pages/cart/Cart";
 import Lost from "./components/pages/lost/Lost"
+import Payment from "./components/pages/payment/Payment";
 function App() {
   const dispatch = useDispatch();
 
@@ -47,6 +48,7 @@ function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/shop/:id" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/payment/:amount" element={<Payment />} />
         <Route path="/*" element={<Lost />} />
       </Routes>
     </>
