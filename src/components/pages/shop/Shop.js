@@ -45,8 +45,8 @@ const Shop = () => {
                 <aside>
                     <Divider />
                     <section className="filter-sec">
-                        <p className=''><h6>Filter using rating</h6>
-                            <Rating name="read-only" size="small" value={5} readOnly />
+                        <h6>Filter using rating</h6>
+                           <p> <Rating name="read-only" size="small" value={5} readOnly />
                         </p>
                         <Slider onChange={(e) => { setRate(parseInt(e.target.value)); }}
                             size="small"
@@ -63,7 +63,7 @@ const Shop = () => {
                     </section>
                     <br />
                     <section className="filter-sec">
-                        <p className=''><h6>Filter using range</h6> </p>
+                        <h6>Filter using range</h6>
                         <ul style={{ paddingLeft: 0 }} >
                             <li>
                                 <input id="0-25" value="0-25" type="checkbox" name="prange" />
