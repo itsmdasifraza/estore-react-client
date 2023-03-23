@@ -9,6 +9,7 @@ import "./Cart.css";
 const Cart = () => {
     const products = useSelector((state) => state.products);
     let [totalPrice, setTotalPrice] = useState(0);
+    let [cart, setCart] = useState([]);
     document.title = `Cart | ${environment.app.name}`;
     const navigate = useNavigate();
 
@@ -19,6 +20,10 @@ const Cart = () => {
                 if (elem.presentInCart === true) {
                     setTotalPrice((amount) => {
                         return amount + elem.price;
+                    });
+                    setCart((prev)=>{
+                        let temp= [...prev, elem];
+                        return temp;
                     });
                 }
             });
@@ -33,8 +38,7 @@ const Cart = () => {
                     <div className="col-md-8">
                         <h2 className="pb-3"><b>Cart items</b></h2>
                         <div className="row" id="cart-product">
-                            {products.map((elem) => {
-                                if (elem.presentInCart === true) {
+                            {cart.map((elem) => {
                                     return (<Card
                                         key={elem.id}
                                         id={elem.id}
@@ -43,8 +47,7 @@ const Cart = () => {
                                         price={elem.price}
                                         rate={elem.rating.rate}
                                     />);
-                                }
-                                return (<div key={elem.id}></div>);
+                                
                             })}
                             {!totalPrice ?
                             <div className='col-12 pb-3'>
@@ -58,8 +61,8 @@ const Cart = () => {
                     </div>
                     <div className="col-md-4">
                         <div id="checkout" className="checkout">
-                            {products.map((elem) => {
-                                if (elem.presentInCart === true) {
+                            {cart.map((elem) => {
+                               
                                     return (
                                         <div key={elem.id} style={{
                                             display: "flex",
@@ -76,8 +79,7 @@ const Cart = () => {
                                         </div>
 
                                     );
-                                }
-                                return (<div key={elem.id}></div>);
+                                
 
                             })}
                             {!totalPrice ? <h6>Cart is empty, your total amount is ${totalPrice}</h6> : <></>}
