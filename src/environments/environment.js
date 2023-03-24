@@ -7,6 +7,9 @@ const environment = {
       name : "eStore",
       description: " Electroic store for online shopping. This project is build using React, Redux, Bootstrap, Material UI, API, and LocalStorage."
     },
+    payment : {
+      key: "rzp_test_r6FiJfddJh76SI"
+    },
     developer : {
       name : "Md Asif Raza",
       position : "Software Developer",

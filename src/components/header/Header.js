@@ -57,7 +57,7 @@ const Header = () => {
             <section className= "header">
                 <nav>
                     <div className="brand">
-                        <Link  to="/"> <span style={{color:"black"}}>{environment.app.name}</span></Link>
+                        <Link  to="/"> <span style={{color:"rgb(56, 56, 56)"}}>{environment.app.name}</span></Link>
                     </div>
                     <div className="nav-items">
                     {!login ? <Link to="/"><span style={{color:"black"}}>HOME</span></Link> : <></>}
