@@ -17,6 +17,7 @@ import Authorized from "./protect/Authorized";
 import Unauthorized from "./protect/Unauthorized";
 import Profile from "./components/pages/profile/Profile";
 import Wishlist from "./components/pages/wishlist/Wishlist";
+import Password from "./components/pages/password/Password";
 function App() {
   const dispatch = useDispatch();
 
@@ -56,6 +57,7 @@ function App() {
         <Route path="/payment/:amount" element={<Authorized Component= {Payment}/>} />
         <Route path="/profile" element={<Authorized Component= {Profile}/>} />
         <Route path="/wishlist" element={<Authorized Component= {Wishlist}/>} />
+        <Route path="/change-password" element={<Authorized Component= {Password}/>} />
         <Route path="/*" element={<Lost />} />
       </Routes>
     </>
