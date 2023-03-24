@@ -10,6 +10,7 @@ import ThemeButton from "../../buttons/ThemeButton";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import Fab from '@mui/material/Fab';
 import Tooltip from '@mui/material/Tooltip';
+import environment from "../../../environments/environment.js";
 
 const Product = () => {
     const products = useSelector((state) => state.products);
@@ -17,7 +18,7 @@ const Product = () => {
     let { id } = useParams();
     const dispatch = useDispatch();
     id = parseInt(id);
-
+    document.title = `${product.title} | ${environment.app.name}`;
 
     useEffect(() => {
         const extractFromProducts = () => {

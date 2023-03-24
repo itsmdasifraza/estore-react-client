@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from 'react-router';
 import "./Card.css";
 import Rating from '@mui/material/Rating';
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const Card = (props)=>{
     let navigate = useNavigate();
     return (
@@ -24,7 +24,7 @@ const Card = (props)=>{
                         <div className="d-flex" style={{justifyContent:"space-between"}}>
                             <h6>${props.price}</h6>
                             <div className="pb-3"><Rating name="read-only" value={Math.round(props.rate)} readOnly /></div>
-               
+                            <ShoppingCartIcon  size="small" sx={{color: "#fed700"}}/>
                         </div>
                     </div>
                 </div>

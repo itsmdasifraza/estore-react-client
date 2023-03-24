@@ -16,6 +16,7 @@ import Payment from "./components/pages/payment/Payment"
 import Authorized from "./protect/Authorized";
 import Unauthorized from "./protect/Unauthorized";
 import Profile from "./components/pages/profile/Profile";
+import Wishlist from "./components/pages/wishlist/Wishlist";
 function App() {
   const dispatch = useDispatch();
 
@@ -54,6 +55,7 @@ function App() {
         <Route path="/cart" element={<Authorized Component= {Cart}/>} />
         <Route path="/payment/:amount" element={<Authorized Component= {Payment}/>} />
         <Route path="/profile" element={<Authorized Component= {Profile}/>} />
+        <Route path="/wishlist" element={<Authorized Component= {Wishlist}/>} />
         <Route path="/*" element={<Lost />} />
       </Routes>
     </>
