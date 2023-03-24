@@ -9,6 +9,7 @@ import Card from "./card/Card";
 import Slider from '@mui/material/Slider';
 import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
+import ThemeButton from "../../buttons/ThemeButton";
 
 const Shop = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
@@ -90,11 +91,11 @@ const Shop = () => {
                     <input className="product-search-input" type="text" onChange={(e) => { setSearchText(e.target.value) }} value={searchText} placeholder="Search product here..." id="search" />
 
                     <div className="filters">
-                        <div id="all" onClick={() => { setCategoryStatus("all"); }} className="filter active">ALL</div>
-                        <div id="mens" onClick={() => { setCategoryStatus("men's clothing"); }} className="filter">MENS</div>
-                        <div id="womens" onClick={() => { setCategoryStatus("women's clothing"); }} className="filter">WOMENS</div>
-                        <div id="jewellery" onClick={() => { setCategoryStatus("jewelery"); }} className="filter">JEWELLERY</div>
-                        <div id="electronics" onClick={() => { setCategoryStatus("electronics"); }} className="filter">ELECTRONICS</div>
+                        <ThemeButton id="all" onClick={() => { setCategoryStatus("all"); }} className="filter active">ALL</ThemeButton>
+                        <ThemeButton id="mens" onClick={() => { setCategoryStatus("men's clothing"); }} className="filter">MENS</ThemeButton>
+                        <ThemeButton id="womens" onClick={() => { setCategoryStatus("women's clothing"); }} className="filter">WOMENS</ThemeButton>
+                        <ThemeButton id="jewellery" onClick={() => { setCategoryStatus("jewelery"); }} className="filter">JEWELLERY</ThemeButton>
+                        <ThemeButton id="electronics" onClick={() => { setCategoryStatus("electronics"); }} className="filter">ELECTRONICS</ThemeButton>
                     </div>
                     <section className={{ zIndex: "-1 important" }} id="product-items">
                         <div className="row">

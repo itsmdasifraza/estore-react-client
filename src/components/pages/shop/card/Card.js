@@ -7,7 +7,7 @@ const Card = (props)=>{
     let navigate = useNavigate();
     return (
         <>
-        <div className="col-md-3 col-sm-4 pb-3">
+        <div className="col-lg-3 col-md-4 col-sm-6 pb-3">
             <div className="pro-card" onClick={()=>{navigate(`/shop/${props.id}`);}} >
                 <div style={{display:"flex"}} >
                     <img src={props.image} alt="Item" height="200px" style={{margin:"0 auto"}} />

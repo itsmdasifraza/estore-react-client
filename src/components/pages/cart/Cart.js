@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import environment from "../../../environments/environment.js";
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
 import Card from "./card/Card";
 import "./Cart.css";
-
+import ThemeButton from "../../buttons/ThemeButton";
 const Cart = () => {
     const products = useSelector((state) => state.products);
     let [totalPrice, setTotalPrice] = useState(0);
@@ -15,6 +14,7 @@ const Cart = () => {
 
     useEffect(() => {
         setTotalPrice(0);
+        setCart([]);
         let calculate = () => {
             products.forEach((elem) => {
                 if (elem.presentInCart === true) {
@@ -34,9 +34,10 @@ const Cart = () => {
     return (
         <>
             <div className="container-fluid pt-5">
+            <h2 className="pb-3"><b>Cart items</b></h2>
                 <div className="row">
                     <div className="col-md-8">
-                        <h2 className="pb-3"><b>Cart items</b></h2>
+                       
                         <div className="row" id="cart-product">
                             {cart.map((elem) => {
                                     return (<Card
@@ -92,9 +93,9 @@ const Cart = () => {
                                 <h6>${Math.round(totalPrice)}</h6>
                             </div>
                             <hr />
-                            <Button onClick={() => {
+                            <ThemeButton onClick={() => {
                                 navigate(`/payment/${Math.round(totalPrice)}`);
-                            }} variant="contained" sx={{ width: "100%", backgroundColor: "#fed700", color:"black" }} size="medium">Checkout</Button>
+                            }} variant="contained" sx={{ width: "100%" }} size="medium">Checkout</ThemeButton>
 
                         </div>
 
