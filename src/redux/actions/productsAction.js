@@ -16,4 +16,16 @@ const removeFromCartProduct = (id) => {
     payload: id,
   };
 };
-export {setProducts, addToCartProduct, removeFromCartProduct};
+const addToWishlistProduct = (id) => {
+  return {
+    type: "ADD_TO_WISHLIST_PRODUCT",
+    payload: id,
+  };
+};
+const removeFromWishlistProduct = (id) => {
+  return {
+    type: "REMOVE_FROM_WISHLIST_PRODUCT",
+    payload: id,
+  };
+};
+export {setProducts, addToCartProduct, removeFromCartProduct, addToWishlistProduct, removeFromWishlistProduct};

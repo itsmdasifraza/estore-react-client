@@ -17,6 +17,7 @@ import Tooltip from '@mui/material/Tooltip';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import environment from "../../environments/environment.js";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -39,17 +40,26 @@ const Header = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const [count, setCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+  const [wishlistCount, setWishlistCount] = useState(0);
   useEffect(()=>{
-    setCount((c)=>{
+    setCartCount((c)=>{
         return 0;
     });
+    setWishlistCount((c)=>{
+      return 0;
+  });
     products.forEach(elem => {
         if(elem.presentInCart === true){
-            setCount((c)=>{
+            setCartCount((c)=>{
                 return c + 1;
             });
         }
+        if(elem.presentInWishlist === true){
+          setWishlistCount((c)=>{
+              return c + 1;
+          });
+      }
     });
   },[products]);
     return (
@@ -65,11 +75,16 @@ const Header = () => {
                     {!login ? <Link to="/register"><span style={{color:"black"}}>REGISTER</span></Link> : <></>}
                     {login ? <Link to="/shop"> <Tooltip title="Shop"><AddBusinessIcon fontSize="medium" sx={{color: "black"}}/></Tooltip></Link> : <></>}
                     {login ? <Link to="/cart"><Tooltip title="Cart"><IconButton sx={{color:"black"}} aria-label="cart">
-      <StyledBadge badgeContent={count} color="secondary">
+      <StyledBadge badgeContent={cartCount} color="secondary">
         <ShoppingCartIcon />
       </StyledBadge>
     </IconButton></Tooltip></Link> : <></>}
-                    
+
+    {login ? <Link to="/wishlist"><Tooltip title="Wishlist"><IconButton sx={{color:"black"}} aria-label="cart">
+      <StyledBadge badgeContent={wishlistCount} color="secondary">
+        <FavoriteIcon />
+      </StyledBadge>
+    </IconButton></Tooltip></Link> : <></>}
                     
 
                     {login ? <React.Fragment>

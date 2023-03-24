@@ -35,6 +35,7 @@ function App() {
       // console.log(res);
       res.forEach((elem)=>{
           elem["presentInCart"] = false;
+          elem["presentInWishlist"] = false;
       });
       dispatch(setProducts(res));
     }
