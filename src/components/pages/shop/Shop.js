@@ -52,7 +52,7 @@ const Shop = () => {
                         <Slider onChange={(e) => { setRate(parseInt(e.target.value)); }}
                             size="small"
                             aria-label="Temperature"
-                            defaultValue={rate}
+                            value={rate}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}

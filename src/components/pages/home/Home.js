@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom"
-import Button from '@mui/material/Button';
 import "./Home.css";
 import landingPic from '../../../assets/home-landing-page.png';
 import environment from "../../../environments/environment.js";
+import ThemeButton from "../../buttons/ThemeButton";
 
 const Home = () => {
   document.title = `${environment.app.name} | ${environment.app.description}`;
@@ -16,8 +16,8 @@ const Home = () => {
           <div className="col-md-6 pt-5">
             <h1 className="pt-3 pb-2 heading">{environment.app.name}</h1>
             <p>{environment.app.description}</p>
-            <Link to="/login" className="first-button"><Button sx={{backgroundColor: "#fed700", color:"black"}} variant="contained" size="medium">Login</Button></Link>
-            <Link to="/register"><Button sx={{backgroundColor: "#fed700", color:"black"}} variant="contained" size="medium">Register</Button></Link>
+            <Link to="/login" className="first-button"><ThemeButton  variant="contained" size="medium">Login</ThemeButton></Link>
+            <Link to="/register"><ThemeButton variant="contained" size="medium">Register</ThemeButton></Link>
             <br/>
             
           </div>
