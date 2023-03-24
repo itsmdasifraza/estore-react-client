@@ -25,6 +25,26 @@ const productsReducer = (state = intialState, { type, payload }) => {
       // console.log("remove from cart", arrr);
       localStorage.setItem("products", JSON.stringify(arrr));
       return arrr;
+      case "ADD_TO_WISHLIST_PRODUCT":
+      let wisharr = [...state];
+      wisharr.forEach((elem) => {
+        if (elem.id === payload) {
+          elem.presentInWishlist = true;
+        }
+      });
+      // console.log("remove from cart", arrr);
+      localStorage.setItem("products", JSON.stringify(wisharr));
+      return wisharr;
+      case "REMOVE_FROM_WISHLIST_PRODUCT":
+      let wisharr2 = [...state];
+      wisharr2.forEach((elem) => {
+        if (elem.id === payload) {
+          elem.presentInWishlist = false;
+        }
+      });
+      // console.log("remove from cart", arrr);
+      localStorage.setItem("products", JSON.stringify(wisharr2));
+      return wisharr2;
     default:
       return state;
   }
