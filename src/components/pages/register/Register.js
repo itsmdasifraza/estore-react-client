@@ -23,23 +23,23 @@ const Register = () => {
   const [error, setError] = useState("");
   const registerForm = (event) => {
     event.preventDefault();
-    if(event.target["name"].value.length === 0){
+    if (event.target["name"].value.length === 0) {
       setError("Name can't be empty!");
       return;
-    } 
-    if(event.target["email"].value.length === 0){
+    }
+    if (event.target["email"].value.length === 0) {
       setError("Email address can't be empty!");
       return;
     }
-    if(!validateEmail(event.target["email"].value)){
+    if (!validateEmail(event.target["email"].value)) {
       setError("Invalid email address!");
       return;
     }
     if (!passwordMatch(event.target["pass"].value, event.target["pass2"].value)) {
-      setError("Password mismatch!");
+      setError("Confirm password mismatch!");
       return;
     }
-    if(event.target["pass"].value.length < 8 ){
+    if (event.target["pass"].value.length < 8) {
       setError("Password must contain minimum 8 characters!");
       return;
     }
@@ -75,11 +75,11 @@ const Register = () => {
                   </div>
                   <form id="signup-form" onSubmit={registerForm}>
                     {error !== "" ? <div className='error-73'><small>{error}</small></div> : <></>}
-                    
+
                     <input type="text" id="name" name="name" aria-describedby="emailHelp"
                       placeholder="Full Name" />
                     <input type="text" id="email" name="email" aria-describedby="emailHelp"
-                      placeholder="Email"  />
+                      placeholder="Email" />
                     <input type="password" id="pass" name="pass" placeholder="Password" />
                     <input type="password" id="pass2" name="pass2" placeholder="Confirm Password" />
 
