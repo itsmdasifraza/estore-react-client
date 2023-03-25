@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
 import environment from "../../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
+import ThemeButton from "../../buttons/ThemeButton";
 
 const Login = () => {
     let navigate = useNavigate();
     document.title = `Login | ${environment.app.name}`;
+    const [error, setError] = useState("");
 
     function generateToken() {
         let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()';
@@ -15,9 +17,27 @@ const Login = () => {
         }
         return result;
     }
-
+    const validateEmail = (email) => {
+        return String(email)
+          .toLowerCase()
+          .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          );
+      };
     const loginForm = (event) => {
         event.preventDefault();
+        if(event.target["email"].value.length === 0){
+            setError("Email address can't be empty!");
+            return;
+          }
+          if(!validateEmail(event.target["email"].value)){
+            setError("Invalid email address!");
+            return;
+          }
+          if(event.target["pass"].value.length < 8 ){
+            setError("Password must contain minimum 8 characters!");
+            return;
+          }
         let users = JSON.parse(localStorage.getItem("users"));
         if(users){
             users.forEach(element => {
@@ -26,12 +46,17 @@ const Login = () => {
                     currentUser["token"] = generateToken();
                     localStorage.setItem("currentUser", JSON.stringify(currentUser));
                     navigate(`/shop`);
+                    return;
                 }
             });
+            setError("Wrong email or password!");
+            return;
         }
-        //else{} //register first
-        //error.innerHTML = "<small className='text-danger'>Authentication Failed</small>";
-        // wrong password
+        
+        else{
+            setError("User not registered!");
+            return;
+        } 
     }
     return (
         <>
@@ -48,11 +73,13 @@ const Login = () => {
                                     </div>
 
                                     <form onSubmit={loginForm}>
-                                        <input type="email"  id="email" name="email" aria-describedby="emailHelp"
-                                            placeholder="Email" required />
-                                        <input type="password"  id="pass" name="pass" placeholder="Password" required />
+                                    {error !== "" ? <div className='error-74'><small>{error}</small></div> : <></>}
+                    
+                                        <input type="text"  id="email" name="email" aria-describedby="emailHelp"
+                                            placeholder="Email" />
+                                        <input type="password"  id="pass" name="pass" placeholder="Password" />
 
-                                        <button type="submit" >Login</button>
+                                        <ThemeButton type="submit" >Login</ThemeButton>
                                         <br />
 
                                     </form>
