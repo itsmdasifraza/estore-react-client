@@ -95,11 +95,11 @@ const Shop = () => {
                     <input className="product-search-input" type="text" onChange={(e) => { dispatch(setSearchText(e.target.value));}} value={filter.searchText} placeholder="Search product here..." id="search" />
 
                     <div className="filters">
-                        <ThemeButton id="all" onClick={() => { dispatch(setCategory("all")); }} className="filter active">ALL</ThemeButton>
-                        <ThemeButton id="mens" onClick={() => { dispatch(setCategory("men's clothing")); }} className="filter">MENS</ThemeButton>
-                        <ThemeButton id="womens" onClick={() => { dispatch(setCategory("women's clothing")); }} className="filter">WOMENS</ThemeButton>
-                        <ThemeButton id="jewellery" onClick={() => { dispatch(setCategory("jewelery")); }} className="filter">JEWELLERY</ThemeButton>
-                        <ThemeButton id="electronics" onClick={() => { dispatch(setCategory("electronics")); }} className="filter">ELECTRONICS</ThemeButton>
+                        <ThemeButton id="all" onClick={() => { dispatch(setCategory("all")); }}  className={filter.categoryStatus === "all" ? "filter active" :"filter" } >ALL</ThemeButton>
+                        <ThemeButton id="mens" onClick={() => { dispatch(setCategory("men's clothing")); }} className={filter.categoryStatus === "men's clothing" ? "filter active" :"filter" }>MENS</ThemeButton>
+                        <ThemeButton id="womens" onClick={() => { dispatch(setCategory("women's clothing")); }} className={filter.categoryStatus === "women's clothing" ? "filter active" :"filter" }>WOMENS</ThemeButton>
+                        <ThemeButton id="jewellery" onClick={() => { dispatch(setCategory("jewelery")); }} className={filter.categoryStatus === "jewelery" ? "filter active" :"filter" }>JEWELLERY</ThemeButton>
+                        <ThemeButton id="electronics" onClick={() => { dispatch(setCategory("electronics")); }} className={filter.categoryStatus === "electronics" ? "filter active" :"filter" }>ELECTRONICS</ThemeButton>
                     </div>
                     <section className={{ zIndex: "-1 important" }} id="product-items">
                         <div className="row">
