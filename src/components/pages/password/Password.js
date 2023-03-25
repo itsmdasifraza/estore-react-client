@@ -6,7 +6,7 @@ import ThemeButton from "../../buttons/ThemeButton";
 const Password = () => {
     let navigate = useNavigate();
     document.title = `Change password | ${environment.app.name}`;
-
+    const [error, setError] = useState("");
     let [currUser, setCurrUser] = useState({});
     useEffect(()=>{
         let user = JSON.parse(localStorage.getItem("currentUser"));
@@ -26,10 +26,18 @@ const Password = () => {
 
     const changePasswordForm = (event) => {
         event.preventDefault();
+        if(event.target["passOld"].value.length < 8 ){
+            setError("Old password must contain minimum 8 characters!");
+            return;
+          }
         if (!passwordMatch(event.target["passNew"].value, event.target["passNew2"].value)) {
-            alert("Password Mismatch");
+            setError("Confirm password mismatch!");
             return;
         }
+        if(event.target["passNew"].value.length < 8 ){
+            setError("New password must contain minimum 8 characters!");
+            return;
+          }
         let users = JSON.parse(localStorage.getItem("users"));
         if(users){
             users.forEach(element => {
@@ -38,9 +46,16 @@ const Password = () => {
                         element["pass"] = event.target["passNew"].value;
                         localStorage.setItem("users", JSON.stringify(users));
                         logout();
+                        return;
                     }
                 }
             });
+            setError("Incorrect old password!");
+            return;
+        }
+        else{
+            setError("User not registered!");
+            return;
         }
     }
 
@@ -61,9 +76,11 @@ const Password = () => {
                                     </div>
 
                                     <form onSubmit={changePasswordForm}>
-                                        <input type="password" id="passOld" name="passOld" placeholder="Old Password" required />
-                                        <input type="password" id="passNew" name="passNew" placeholder="New Password" required />
-                                        <input type="password" id="passNew2" name="passNew2" placeholder="Confirm New Password" required />
+                                    {error !== "" ? <div className='error-75'><small>{error}</small></div> : <></>}
+                   
+                                        <input type="password" id="passOld" name="passOld" placeholder="Old Password"  />
+                                        <input type="password" id="passNew" name="passNew" placeholder="New Password"  />
+                                        <input type="password" id="passNew2" name="passNew2" placeholder="Confirm New Password"  />
 
                                         <ThemeButton type="submit" >CHANGE PASSWORD</ThemeButton>
                                         <br />
