@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./Password.css";
 import environment from "../../../environments/environment.js";
 import { useNavigate } from "react-router-dom";
-
+import ThemeButton from "../../buttons/ThemeButton";
 const Password = () => {
     let navigate = useNavigate();
-    document.title = `Login | ${environment.app.name}`;
+    document.title = `Change password | ${environment.app.name}`;
 
     let [currUser, setCurrUser] = useState({});
     useEffect(()=>{
@@ -65,7 +65,7 @@ const Password = () => {
                                         <input type="password" id="passNew" name="passNew" placeholder="New Password" required />
                                         <input type="password" id="passNew2" name="passNew2" placeholder="Confirm New Password" required />
 
-                                        <button type="submit" >CHANGE PASSWORD</button>
+                                        <ThemeButton type="submit" >CHANGE PASSWORD</ThemeButton>
                                         <br />
 
                                     </form>
