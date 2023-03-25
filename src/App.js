@@ -18,6 +18,8 @@ import Unauthorized from "./protect/Unauthorized";
 import Profile from "./components/pages/profile/Profile";
 import Wishlist from "./components/pages/wishlist/Wishlist";
 import Password from "./components/pages/password/Password";
+import Global from "./protect/Global";
+
 function App() {
   const dispatch = useDispatch();
 
@@ -54,14 +56,16 @@ function App() {
         <Route path="/" element={<Unauthorized Component= {Home}/>} />
         <Route path="/login" element={<Unauthorized Component= {Login}/>} />
         <Route path="/register" element={<Unauthorized Component= {Register}/>} />
-        <Route path="/shop" element={<Authorized Component= {Shop}/>} />
+        <Route path="/shop" element={<Global Component= {Shop}/>} />
+        {/* <Route path="/shop" element={<Shop/>} /> */}
         <Route path="/shop/:id" element={<Authorized Component= {Product}/>} />
         <Route path="/cart" element={<Authorized Component= {Cart}/>} />
         <Route path="/payment/:amount" element={<Authorized Component= {Payment}/>} />
         <Route path="/profile" element={<Authorized Component= {Profile}/>} />
         <Route path="/wishlist" element={<Authorized Component= {Wishlist}/>} />
         <Route path="/change-password" element={<Authorized Component= {Password}/>} />
-        <Route path="/*" element={<Lost />} />
+        <Route path="/*" element={<Global Component= {Lost}/>} />
+        {/* <Route path="/*" element={<Lost />} /> */}
       </Routes>
     </>
   );
