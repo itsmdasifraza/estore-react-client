@@ -33,8 +33,8 @@ const Cart = () => {
 
     return (
         <>
-            <div className="container-fluid pt-5">
-            <h2 className="pb-3"><b>Cart items</b></h2>
+            <div className="container pt-5">
+            <h2 className='pb-3 text-center' style={{fontWeight: 800}}>Cart</h2>
                 <div className="row">
                     <div className="col-md-8">
                        

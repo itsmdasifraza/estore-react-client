@@ -26,8 +26,8 @@ const Wishlist = () => {
 
   return (
     <div>
-        <div className='container-fluid pt-5'>
-            <h2 className='pb-3'><b>Wishlist items</b></h2>
+        <div className='container pt-5'>
+            <h2 className='pb-3 text-center' style={{fontWeight: 800}}>Wishlist</h2>
             <div className='row'>
             {wishlist.map((elem) => {
                                     return (<Card

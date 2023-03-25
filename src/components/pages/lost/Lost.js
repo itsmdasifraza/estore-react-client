@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import environment from "../../../environments/environment.js";
 
 const Lost = () => {
-    document.title = `Error | ${environment.app.name}`;
+    document.title = `404 | ${environment.app.name}`;
   return (
     <div>
         <div className="pt-5 d-flex align-items-center justify-content-center">

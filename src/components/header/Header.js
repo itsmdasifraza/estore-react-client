@@ -71,18 +71,19 @@ const Header = () => {
                     </div>
                     <div className="nav-items">
                     {!login ? <Link to="/"><span style={{color:"black"}}>HOME</span></Link> : <></>}
+                    {!login ? <Link to="/shop"><span style={{color:"black"}}>SHOP</span></Link> : <></>}
                     {!login ? <Link to="/login"><span style={{color:"black"}}>LOGIN</span></Link> : <></>}
                     {!login ? <Link to="/register"><span style={{color:"black"}}>REGISTER</span></Link> : <></>}
-                    {login ? <Link to="/shop"> <Tooltip title="Shop"><AddBusinessIcon fontSize="medium" sx={{color: "black"}}/></Tooltip></Link> : <></>}
+                    {login ? <Link to="/shop"> <Tooltip title="Shop"><AddBusinessIcon fontSize="medium" color="success"/></Tooltip></Link> : <></>}
                     {login ? <Link to="/cart"><Tooltip title="Cart"><IconButton sx={{color:"black"}} aria-label="cart">
-      <StyledBadge badgeContent={cartCount} color="secondary">
-        <ShoppingCartIcon />
+      <StyledBadge badgeContent={cartCount} color="primary">
+        <ShoppingCartIcon sx={{color:"#4615b2"}} />
       </StyledBadge>
     </IconButton></Tooltip></Link> : <></>}
 
     {login ? <Link to="/wishlist"><Tooltip title="Wishlist"><IconButton sx={{color:"black"}} aria-label="cart">
-      <StyledBadge badgeContent={wishlistCount} color="secondary">
-        <FavoriteIcon />
+      <StyledBadge badgeContent={wishlistCount} color="error">
+        <FavoriteIcon sx={{color:"#b2102f"}} />
       </StyledBadge>
     </IconButton></Tooltip></Link> : <></>}
                     
@@ -98,7 +99,7 @@ const Header = () => {
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
           >
-            <AccountCircleIcon sx={{color:"black"}}/>
+            <AccountCircleIcon size="medium" sx={{color:"#b26500"}}/>
             {/* <Avatar sx={{ width: 28, height: 28, backgroundColor: "#0080ff" }}></Avatar> */}
           </IconButton>
         </Tooltip>
