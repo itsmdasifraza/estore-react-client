@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./Shop.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import filterByCategory from '../../../filters/filterByCategory';
 import filterByRating from '../../../filters/filterByRating';
 import filterByText from '../../../filters/filterByText';
@@ -10,13 +10,15 @@ import Slider from '@mui/material/Slider';
 import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import ThemeButton from "../../buttons/ThemeButton";
-
+import {setRate, setCategory, setSearchText} from "../../../redux/actions/filterAction";
 const Shop = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const products = useSelector((state) => state.products);
-    const [categoryStatus, setCategoryStatus] = useState("all");
-    const [rate, setRate] = useState(0);
-    const [searchText, setSearchText] = useState("");
+    const filter = useSelector((state) => state.filter);
+    const dispatch = useDispatch();
+    // const [categoryStatus, setCategoryStatus] = useState("all");
+    // const [rate, setRate] = useState(0);
+    // const [searchText, setSearchText] = useState("");
 
     document.title = `Shop | ${environment.app.name}`;
 
@@ -27,13 +29,13 @@ const Shop = () => {
 
     useEffect(() => {
         let startFiltering = () => {
-            let fc = filterByCategory(categoryStatus, products);
-            let fr = filterByRating(rate, fc);
-            let ft = filterByText(searchText, fr);
+            let fc = filterByCategory(filter.categoryStatus, products);
+            let fr = filterByRating(filter.rate, fc);
+            let ft = filterByText(filter.searchText, fr);
             setFilteredProducts(ft);
         }
         startFiltering();
-    }, [rate, categoryStatus, searchText, products]);
+    }, [filter, products]);
 
 
     function valuetext(value) {
@@ -49,10 +51,10 @@ const Shop = () => {
                         <h6>Filter using rating</h6>
                            <p> <Rating name="read-only" size="small" value={5} readOnly />
                         </p>
-                        <Slider onChange={(e) => { setRate(parseInt(e.target.value)); }}
+                        <Slider onChange={(e) => { dispatch(setRate(parseInt(e.target.value))); }}
                             size="small"
                             aria-label="Temperature"
-                            value={rate}
+                            value={filter.rate}
                             getAriaValueText={valuetext}
                             valueLabelDisplay="auto"
                             step={1}
@@ -88,14 +90,14 @@ const Shop = () => {
                 </aside>
                 <main-content>
 
-                    <input className="product-search-input" type="text" onChange={(e) => { setSearchText(e.target.value) }} value={searchText} placeholder="Search product here..." id="search" />
+                    <input className="product-search-input" type="text" onChange={(e) => { dispatch(setSearchText(e.target.value));}} value={filter.searchText} placeholder="Search product here..." id="search" />
 
                     <div className="filters">
-                        <ThemeButton id="all" onClick={() => { setCategoryStatus("all"); }} className="filter active">ALL</ThemeButton>
-                        <ThemeButton id="mens" onClick={() => { setCategoryStatus("men's clothing"); }} className="filter">MENS</ThemeButton>
-                        <ThemeButton id="womens" onClick={() => { setCategoryStatus("women's clothing"); }} className="filter">WOMENS</ThemeButton>
-                        <ThemeButton id="jewellery" onClick={() => { setCategoryStatus("jewelery"); }} className="filter">JEWELLERY</ThemeButton>
-                        <ThemeButton id="electronics" onClick={() => { setCategoryStatus("electronics"); }} className="filter">ELECTRONICS</ThemeButton>
+                        <ThemeButton id="all" onClick={() => { dispatch(setCategory("all")); }} className="filter active">ALL</ThemeButton>
+                        <ThemeButton id="mens" onClick={() => { dispatch(setCategory("men's clothing")); }} className="filter">MENS</ThemeButton>
+                        <ThemeButton id="womens" onClick={() => { dispatch(setCategory("women's clothing")); }} className="filter">WOMENS</ThemeButton>
+                        <ThemeButton id="jewellery" onClick={() => { dispatch(setCategory("jewelery")); }} className="filter">JEWELLERY</ThemeButton>
+                        <ThemeButton id="electronics" onClick={() => { dispatch(setCategory("electronics")); }} className="filter">ELECTRONICS</ThemeButton>
                     </div>
                     <section className={{ zIndex: "-1 important" }} id="product-items">
                         <div className="row">
