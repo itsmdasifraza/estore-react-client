@@ -42,6 +42,7 @@ function App() {
           elem.rating["rate"] = Math.round(elem.rating.rate);
       });
       dispatch(setProducts(res));
+      localStorage.setItem("products", JSON.stringify(res));
     }
     fetchProducts();
   }, [dispatch]);
