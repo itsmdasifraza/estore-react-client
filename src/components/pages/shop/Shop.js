@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import filterByCategory from '../../../filters/filterByCategory';
 import filterByRating from '../../../filters/filterByRating';
 import filterByText from '../../../filters/filterByText';
+import filterByRange from '../../../filters/filterByRange';
 import environment from "../../../environments/environment.js";
 import Card from "./card/Card";
 import Slider from '@mui/material/Slider';
 import Rating from '@mui/material/Rating';
 import Divider from '@mui/material/Divider';
 import ThemeButton from "../../buttons/ThemeButton";
-import {setRate, setCategory, setSearchText} from "../../../redux/actions/filterAction";
+import {setRate, setCategory, setSearchText, setRange} from "../../../redux/actions/filterAction";
 const Shop = () => {
     const [filteredProducts, setFilteredProducts] = useState([]);
     const products = useSelector((state) => state.products);
@@ -32,7 +33,8 @@ const Shop = () => {
             let fc = filterByCategory(filter.categoryStatus, products);
             let fr = filterByRating(filter.rate, fc);
             let ft = filterByText(filter.searchText, fr);
-            setFilteredProducts(ft);
+            let frange = filterByRange(filter.range, ft);
+            setFilteredProducts(frange);
         }
         startFiltering();
     }, [filter, products]);
@@ -69,19 +71,19 @@ const Shop = () => {
                         <h6>Filter using range</h6>
                         <ul style={{ paddingLeft: 0 }} >
                             <li>
-                                <input id="0-25" value="0-25" type="checkbox" name="prange" />
+                                <input id="0-25" value="0-25" type="checkbox" onChange={()=>{dispatch(setRange("range_0_25", !filter.range.range_0_25));}}  checked={filter.range.range_0_25} name="prange" />
                                 <label htmlFor="0-25">Between $0 to $25</label>
                             </li>
                             <li>
-                                <input id="25-50" value="25-50" type="checkbox" name="prange" />
+                                <input id="25-50" value="25-50" type="checkbox" onChange={()=>{dispatch(setRange("range_25_50", !filter.range.range_25_50));}} checked={filter.range.range_25_50}  name="prange" />
                                 <label htmlFor="25-50">Between $25 to $50</label>
                             </li>
                             <li>
-                                <input id="50-100" value="50-100" type="checkbox" name="prange" />
+                                <input id="50-100" value="50-100" type="checkbox" onChange={()=>{dispatch(setRange("range_50_100", !filter.range.range_50_100));}} checked={filter.range.range_50_100}  name="prange" />
                                 <label htmlFor="50-100">Between $50 to $100</label>
                             </li>
                             <li>
-                                <input id="100on" value="100on" type="checkbox" name="prange" />
+                                <input id="100on" value="100on" type="checkbox" onChange={()=>{dispatch(setRange("range_100", !filter.range.range_100));}} checked={filter.range.range_100}  name="prange" />
                                 <label htmlFor="100on">$100 Onwards</label>
                             </li>
                         </ul>

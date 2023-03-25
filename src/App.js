@@ -38,6 +38,8 @@ function App() {
       res.forEach((elem)=>{
           elem["presentInCart"] = false;
           elem["presentInWishlist"] = false;
+          elem["price"] = Math.round(elem.price);
+          elem.rating["rate"] = Math.round(elem.rating.rate);
       });
       dispatch(setProducts(res));
     }

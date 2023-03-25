@@ -48,6 +48,7 @@ const Product = () => {
                         <Rating name="read-only" value={Math.round(product.rating.rate)} readOnly />
 
                         <p>{product.description}</p>
+                        <h2>${product.price}</h2>
                         {!product.presentInCart
                             ?
                             <ThemeButton onClick={() => {
